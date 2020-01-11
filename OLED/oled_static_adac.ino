@@ -4,8 +4,8 @@
 
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ 16, /* clock=*/ 5, /* data=*/ 4);
 
-char *text = "V1=";
-char *texx = "V2=";
+//char *text = "V1=";
+//char *texx = "V2=";
 char buf[12];
 
 const int analogInPin = A0;  // ESP8266 Analog Pin ADC0 = A0
