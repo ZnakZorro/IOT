@@ -25,13 +25,10 @@ byte bajt = 0;
 ESP8266WiFiMulti WiFiMulti;
 
 void setup() {
-u8g2.begin();
+  u8g2.begin();
+  u8g2.setFontMode(0); // mode transparent
   Serial.begin(115200);
   // Serial.setDebugOutput(true);
-
-  Serial.println();
-  Serial.println();
-  Serial.println();
 
   for (uint8_t t = 4; t > 0; t--) {
     Serial.printf("[SETUP] WAIT %d...\n", t);
@@ -87,11 +84,13 @@ void oleOLED(String payload) {
                         sym = t1.substring(t1.length()-1); // ostatnia litera symbolem 
                         t1 = t1.substring(0,t1.length()-1);       // usuwamy ostania litere
                         t1.toCharArray(buftt, 16);
+                        u8g2.drawUTF8(0, 1, "_  ");
                     }
                     if (moda2==1) {
                         sym = t2.substring(t2.length()-1); // ostatnia litera symbolem 
                         t2 = t2.substring(0,t2.length()-1);       // usuwamy ostania litere
                         t2.toCharArray(buftt, 16);
+                        u8g2.drawUTF8(0, 0, "___");
                     }
                     u8g2.drawUTF8(0, 32, buftt); 
                    /*
@@ -119,7 +118,7 @@ void server() {
       printOLED("[HTTP]...");
       if (http.begin(client, "http://zszczech.zut.edu.pl/e/oled.php")) { 
         //Serial.print("[HTTP] GET...\n");
-        printOLED("[HTTP] GET...");
+        printOLED("[HTTP]...");
         int httpCode = http.GET();
         if (httpCode > 0) {
             //Serial.printf("[HTTP] GET... code: %d\n", httpCode);
