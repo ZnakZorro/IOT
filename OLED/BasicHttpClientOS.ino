@@ -74,15 +74,25 @@ void oleOLED(String payload) {
                     Serial.println(dlugosc);
                     t1 = payload.substring(0,podzial);
                     t2 = payload.substring(podzial+1);
-                    String sym = t2.substring(t2.length()-1); // ostatnia litera symbolem
-                    t2 = t2.substring(0,t2.length()-1);       // usuwamy ostania litere
-                    Serial.println(t1);
-                    Serial.println(t2);
-                    Serial.println(sym);
+                    //String sym = t2.substring(t2.length()-1); // ostatnia litera symbolem
+                    //t2 = t2.substring(0,t2.length()-1);       // usuwamy ostania litere
+                    //Serial.println(t1);
+                    //Serial.println(t2);
+                    //Serial.println(sym);
                     
                     u8g2.setFont(u8g2_font_profont29_mf);// 10,11,12,15,17,22,29
-                    if (moda2==0) t1.toCharArray(buftt, 16);
-                    if (moda2==1) t2.toCharArray(buftt, 16);
+
+                    String sym = "";
+                    if (moda2==0) {
+                        sym = t1.substring(t1.length()-1); // ostatnia litera symbolem 
+                        t1 = t1.substring(0,t1.length()-1);       // usuwamy ostania litere
+                        t1.toCharArray(buftt, 16);
+                    }
+                    if (moda2==1) {
+                        sym = t2.substring(t2.length()-1); // ostatnia litera symbolem 
+                        t2 = t2.substring(0,t2.length()-1);       // usuwamy ostania litere
+                        t2.toCharArray(buftt, 16);
+                    }
                     u8g2.drawUTF8(0, 32, buftt); 
                    /*
                     u8g2.setFont(u8g2_font_profont17_mf);// 10,11,12,15,17,22,29
