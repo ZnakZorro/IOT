@@ -15,11 +15,6 @@ char buf3[16];
 char *text = "V1=";
 String t1="";
 String t2="";
-/*
-String t3="";
-String t4="";
-String t5="";
-String t6="";*/
 String payload = "_______________";
 char   buftt[16];
 String tt="";
@@ -34,17 +29,15 @@ void setup() {
   // Serial.setDebugOutput(true);
 
   for (uint8_t t = 4; t > 0; t--) {
-    Serial.printf("[SETUP] WAIT %d...\n", t);
+    //Serial.printf("[SETUP] WAIT %d...\n", t);
     t1 = "WiFi:";
     t1.concat(t);
     printOLED(t1);
     Serial.flush();
     delay(1000);
   }
-
   WiFi.mode(WIFI_STA);
   WiFiMulti.addAP("znakzorro_plus", "niemieckiewino");
-  
 }
 
 void printOLED(String txt) {
@@ -57,97 +50,49 @@ void printOLED(String txt) {
   } while (u8g2.nextPage());   
 }
 
-void oleOLED(String payload) {
-          Serial.println(payload);
-                  /*OLED*/
-                 u8g2.firstPage();
-                  do {
-                    byte moda2 = bajt % 2;
-                    byte moda4 = bajt % 4;
-                    bajt++;
-                    Serial.println(bajt);
-                    Serial.println(moda2);
-                    Serial.println(moda4);
-                    int podzial = payload.indexOf("\n");
-                    int dlugosc = payload.length();
-                    Serial.println(podzial);
-                    Serial.println(dlugosc);
-                    t1 = payload.substring(0,podzial);
-                    t2 = payload.substring(podzial+1);
-                    //String sym = t2.substring(t2.length()-1); // ostatnia litera symbolem
-                    //t2 = t2.substring(0,t2.length()-1);       // usuwamy ostania litere
-                    //Serial.println(t1);
-                    //Serial.println(t2);
-                    //Serial.println(sym);
-                    
-                    u8g2.setFont(u8g2_font_profont29_mf);// 10,11,12,15,17,22,29
-
-                    String sym = "";
-                    if (moda2==0) {
-                        sym = t1.substring(t1.length()-1); // ostatnia litera symbolem 
-                        t1 = t1.substring(0,t1.length()-1);       // usuwamy ostania litere
-                        t1.toCharArray(buftt, 16);
-                        u8g2.drawUTF8(0, 1, "_  ");
-                    }
-                    if (moda2==1) {
-                        sym = t2.substring(t2.length()-1); // ostatnia litera symbolem 
-                        t2 = t2.substring(0,t2.length()-1);       // usuwamy ostania litere
-                        t2.toCharArray(buftt, 16);
-                        u8g2.drawUTF8(0, 0, "___");
-                    }
-                    u8g2.drawUTF8(0, 32, buftt); 
-                   /*
-                    u8g2.setFont(u8g2_font_profont17_mf);// 10,11,12,15,17,22,29
-                    t1.toCharArray(buftt, 16);
-                    u8g2.drawUTF8(0, 16, buftt); 
-                    
-                    t2.toCharArray(buftt, 16);
-                    u8g2.drawUTF8(0, 32, buftt); 
-                    */
-                        u8g2.setFont(u8g2_font_open_iconic_weather_4x_t); // 4x=32px  2x=16px
-                        sym.toCharArray(buftt, 16);
-                        u8g2.drawUTF8(96, 32, buftt); 
-                                          
-                  } while ( u8g2.nextPage() );
-                  /*OLED*/
-}
 
 void olejOLED(){
     String t1 = doc["t1"];
     String t2 = doc["t2"];
+    String t3 = doc["t3"];
     String d1 = doc["d1"];
     String d2 = doc["d2"];
+    String d3 = doc["d3"];
     String s1 = doc["s1"];
     String s2 = doc["s2"];
+    String s3 = doc["s3"];
     
-    Serial.print(t1); Serial.print("; ");
-    Serial.print(t2); Serial.print("; ");
-    Serial.print(d1); Serial.print("; ");
-    Serial.print(d2); Serial.print("; "); 
-    Serial.print(s1); Serial.print("; ");
-    Serial.print(s2); Serial.print("; "); 
+    //Serial.print(t1); Serial.print("; ");    Serial.print(t2); Serial.print("; ");    Serial.print(d1); Serial.print("; ");    Serial.print(d2); Serial.print("; ");     Serial.print(s1); Serial.print("; ");    Serial.print(s2); Serial.print("; "); 
 
-            byte moda2 = bajt % 2;
-            byte moda4 = bajt % 4;
+            byte moda = bajt % 3;
             bajt++;
-            Serial.print(bajt); Serial.print(" %= ");  Serial.println(moda2);
+            //Serial.print(bajt); Serial.print(" %= ");  Serial.println(moda);
             
         String symbolIcon = "";    
         u8g2.firstPage();
         do {
             u8g2.setFont(u8g2_font_profont29_mf);// 10,11,12,15,17,22,29
-            if (moda2==0) {
-               u8g2.drawUTF8(0, 1, "_  ");
+           
+            if (moda==0) {
+               u8g2.drawUTF8(0, 1, "_   ");
                symbolIcon = s1;
                t1="t"+t1+" d"+d1;
                t1.toCharArray(buftt, 16);
             }
-             if (moda2==1) {
-               u8g2.drawUTF8(0, 1, "___");
+           
+            if (moda==1) {
+               u8g2.drawUTF8(0, 1, "__  ");
                symbolIcon = s2;
-               t2="T"+t2+" D"+d2;
+               t2="t"+t2+" d"+d2;
                t2.toCharArray(buftt, 16);
             }
+             if (moda==2) {
+               u8g2.drawUTF8(0, 1, "____");
+               symbolIcon = s3;
+               t3="t"+t3+" d"+d3;
+               t3.toCharArray(buftt, 16);
+            }
+            
             // print buff with data
             u8g2.drawUTF8(0, 32, buftt);
             
@@ -157,7 +102,6 @@ void olejOLED(){
             u8g2.drawUTF8(96, 32, buftt); 
 
         } while ( u8g2.nextPage() );
-
 }
 
 
@@ -182,9 +126,7 @@ void server() {
                 if (error) {
                   Serial.println(error.c_str());
                 } else {
-                   olejOLED();              
-                  //Serial.print(doc["t1"]);
-                  //oleOLED(payload);
+                   olejOLED();
                 }
             }
         } else {printOLED("Error"); Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str()); }
@@ -194,25 +136,27 @@ void server() {
     } // if connected 
 }
 
+
+long intervalOled = 3*777; // ~3 sek
+long previousOledMillis = 0;    
+
 long intervalServer = 900*1000; // 15 minut
 long previousServerMillis = 0;    
 
-long intervalOled = 3*1000; // 3 se
-long previousOledMillis = 0;    
-
-
 void loop() {
   unsigned long currentMillis = millis();
-  
-  if(currentMillis - previousOledMillis > intervalOled) {
+
+  // OLED timing system
+  if(currentMillis - previousOledMillis > intervalOled  && previousServerMillis > 0) {
       previousOledMillis = currentMillis;   
-      Serial.println("OLED=1");
+      //Serial.print(currentMillis);Serial.println(" intervalOled===");
       olejOLED();
   }
-  
+
+   // Server timing system
   if(currentMillis - previousServerMillis > intervalServer || previousServerMillis == 0) {
       previousServerMillis = currentMillis;   
-      Serial.println("server=");
+      //Serial.print(currentMillis); Serial.println(" intervalServer===");
       printOLED("Server=900");
       server();
   }
