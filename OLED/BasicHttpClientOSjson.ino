@@ -119,13 +119,48 @@ void olejOLED(){
     String d2 = doc["d2"];
     String s1 = doc["s1"];
     String s2 = doc["s2"];
+    
     Serial.print(t1); Serial.print("; ");
     Serial.print(t2); Serial.print("; ");
     Serial.print(d1); Serial.print("; ");
     Serial.print(d2); Serial.print("; "); 
     Serial.print(s1); Serial.print("; ");
     Serial.print(s2); Serial.print("; "); 
+
+            byte moda2 = bajt % 2;
+            byte moda4 = bajt % 4;
+            bajt++;
+            Serial.print(bajt); Serial.print(" %= ");  Serial.println(moda2);
+            
+        String symbolIcon = "";    
+        u8g2.firstPage();
+        do {
+            u8g2.setFont(u8g2_font_profont29_mf);// 10,11,12,15,17,22,29
+            if (moda2==0) {
+               u8g2.drawUTF8(0, 1, "_  ");
+               symbolIcon = s1;
+               t1="t"+t1+" d"+d1;
+               t1.toCharArray(buftt, 16);
+            }
+             if (moda2==1) {
+               u8g2.drawUTF8(0, 1, "___");
+               symbolIcon = s2;
+               t2="T"+t2+" D"+d2;
+               t2.toCharArray(buftt, 16);
+            }
+            // print buff with data
+            u8g2.drawUTF8(0, 32, buftt);
+            
+            // print symbol
+            u8g2.setFont(u8g2_font_open_iconic_weather_4x_t); // 4x=32px  2x=16px
+            symbolIcon.toCharArray(buftt, 16);
+            u8g2.drawUTF8(96, 32, buftt); 
+
+        } while ( u8g2.nextPage() );
+
 }
+
+
 void server() {
     printOLED("Update");
     if ((WiFiMulti.run() == WL_CONNECTED)) {
@@ -144,16 +179,13 @@ void server() {
                 payload = http.getString();
                 Serial.println(payload);
                 DeserializationError error = deserializeJson(doc, payload);
-               
                 if (error) {
                   Serial.println(error.c_str());
-                } else
-                {  
+                } else {
                    olejOLED();              
-                //Serial.print(doc["t1"]);
-                //oleOLED(payload);
+                  //Serial.print(doc["t1"]);
+                  //oleOLED(payload);
                 }
-                
             }
         } else {printOLED("Error"); Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str()); }
         http.end();
@@ -174,8 +206,8 @@ void loop() {
   
   if(currentMillis - previousOledMillis > intervalOled) {
       previousOledMillis = currentMillis;   
-      //Serial.println("OLED=1");
-      //oleOLED(payload);
+      Serial.println("OLED=1");
+      olejOLED();
   }
   
   if(currentMillis - previousServerMillis > intervalServer || previousServerMillis == 0) {
