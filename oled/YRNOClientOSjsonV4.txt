@@ -8,38 +8,16 @@
 #include <U8g2lib.h>
 #include <ArduinoJson.h>    //https://github.com/bblanchon/ArduinoJson
 
-#define width16 16
-#define height16 16
 #define width8 16
 #define height8 16
-static unsigned char u8g2_linia16[] = {0x00, 0x80, 0x00, 0x40, 0x00, 0x20, 0x00, 0x10, 0x00, 0x08, 0x00, 0x04, 0x00, 0x02, 0x00, 0x01, 0x80, 0x00, 0x40, 0x00, 0x20, 0x00, 0x10, 0x00, 0x08, 0x00, 0x04, 0x00, 0x02, 0x00, 0x01, 0x00};
-
-
-/////////////////////
-#define kropla_width 8
-#define kropla_height 8
-static unsigned char kropla_bits[] = { 0x00, 0x08, 0x1c, 0x1c, 0x3e, 0x3e, 0x1c, 0x08 };
-
-#define kropla16_width 16
-#define kropla16_height 16
-//static unsigned char kropla16_bits[] = { 0x80, 0x00, 0xc0, 0x01, 0xc0, 0x01, 0xe0, 0x03, 0xe0, 0x03, 0xf0, 0x07, 0xf8, 0x0f, 0xfc, 0x1f, 0xfe, 0x3f, 0xff, 0x7f, 0xff, 0x7f, 0xff, 0x7f, 0xfe, 0x3f, 0xfc, 0x1f, 0xf8, 0x0f, 0xe0, 0x03 };
-//static unsigned char kropla16_bits[] = { 0x80, 0x00, 0xc0, 0x01, 0xc0, 0x01, 0xe0, 0x03, 0xe0, 0x03, 0xf0, 0x07, 0xf0, 0x07, 0xf8, 0x0f, 0xfc, 0x1f, 0xfe, 0x3f, 0xfe, 0x3f, 0xfe, 0x3f, 0xfe, 0x3f, 0xfc, 0x1f, 0xf8, 0x0f, 0xe0, 0x03 };
+#define width16 16
+#define height16 16
 static unsigned char kropla16_bits[] = { 0x80, 0x00, 0x80, 0x00, 0xc0, 0x01, 0xc0, 0x01, 0xe0, 0x03, 0xe0, 0x03, 0xf0, 0x07, 0xf0, 0x07, 0xf8, 0x0f, 0xf8, 0x0f, 0xfc, 0x1f, 0xfc, 0x1f, 0xfc, 0x1f, 0xf8, 0x0f, 0xf0, 0x07, 0xc0, 0x01 };
-
-
-
-
 
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ 16, /* clock=*/ 5, /* data=*/ 4);
 
 char buftt[16];
 
-/*
-char linia1[16];
-char linia2[16];
-char linia3[16];
-char linia4[16];
-*/
 String linia1  = "";
 String linia2  = "";
 String linia3  = "";
@@ -116,13 +94,12 @@ String dajZnak(String t){
 }
 
 void parseJsonSingle(int nr){
-  Serial.println("parseJsonSingle---");
+  //Serial.println("parseJsonSingle---");
     if (nr==1){ 
         
         String t = doc["t1"]; if(t=="null") {t="?";}
         String d = doc["d1"]; if(d=="null") {d="0";}
         String s = doc["s1"]; if(s=="null") {s="A";}
-        //linia1=dajZnak(t)+t+" o"+d;
         linia1=dajZnak(t)+t;
         symbol1 = s;
         deszcz1=d.toInt();
@@ -131,7 +108,6 @@ void parseJsonSingle(int nr){
         String t = doc["t2"]; if(t=="null") {t="?";}
         String d = doc["d2"]; if(d=="null") {d="0";}
         String s = doc["s2"]; if(s=="null") {s="A";}
-        //linia2=dajZnak(t)+t+" o"+d;
         linia2=dajZnak(t)+t;
         symbol2 = s;
         deszcz2=d.toInt();
@@ -140,7 +116,6 @@ void parseJsonSingle(int nr){
         String t = doc["t3"]; if(t=="null") {t="?";}
         String d = doc["d3"]; if(d=="null") {d="0";}
         String s = doc["s3"]; if(s=="null") {s="A";}
-        //linia3=dajZnak(t)+t+" o"+d;
         linia3=dajZnak(t)+t;
         symbol3 = s;
         deszcz3=d.toInt();
@@ -149,7 +124,6 @@ void parseJsonSingle(int nr){
         String t = doc["t4"]; if(t=="null") {t="?";}
         String d = doc["d4"]; if(d=="null") {d="0";}
         String s = doc["s4"]; if(s=="null") {s="A";}
-        //linia4=dajZnak(t)+t+" o"+d;
         linia4=dajZnak(t)+t;
         symbol4 = s;
         deszcz4=d.toInt();
@@ -226,45 +200,12 @@ void olejOLED(){
             //u8g2.drawBox(82,0,8,32);
             delay(50);
             Serial.print(" deszcz=");Serial.println(deszcz);
+ 
+           if (deszcz==1) {u8g2.drawXBM(114, 2, width16, height16, kropla16_bits);}
+           if (deszcz==2) {u8g2.drawXBM(114, 6, width16, height16, kropla16_bits);}
+           if (deszcz==3) {u8g2.drawXBM(114,10, width16, height16, kropla16_bits);}
+           if (deszcz>3)  {u8g2.drawXBM(114, 16, width16, height16, kropla16_bits);}
             
-                  /*
-                  if (deszcz==0) u8g2.drawCircle(122, 16, 5, U8G2_DRAW_ALL); 
-                  //u8g2.drawEllipse(122, 16,  5, 7, U8G2_DRAW_ALL);
-                  if (deszcz>0) u8g2.drawFilledEllipse(122, 5,  3, 5, U8G2_DRAW_ALL);
-                  if (deszcz>1) u8g2.drawFilledEllipse(122, 16, 3, 5, U8G2_DRAW_ALL);
-                  if (deszcz>3) u8g2.drawFilledEllipse(122, 27, 3, 5, U8G2_DRAW_ALL);
-                  */
-            //u8g2.setFontMode(2);
-            //u8g2.drawXBM( 112, 0, width16, height16, u8g2_linia16);
-            //u8g2.drawXBM( 112, 8, width16, height16, u8g2_linia16);
-            //u8g2.drawXBM( 112, 16, width16, height16, u8g2_linia16);
-           if (deszcz==1) {u8g2.drawXBM(114, 2, width16, height16, kropla16_bits);Serial.print(" deszcz=");Serial.print(deszcz); Serial.println("==1");}
-           if (deszcz==2) {u8g2.drawXBM(114, 6, width16, height16, kropla16_bits);Serial.print(" deszcz=");Serial.print(deszcz); Serial.println("==2");}
-           if (deszcz==3) {u8g2.drawXBM(114,10, width16, height16, kropla16_bits);Serial.print(" deszcz=");Serial.print(deszcz); Serial.println("==3");}
-           if (deszcz>3)  {u8g2.drawXBM(114, 16, width16, height16, kropla16_bits);Serial.print(" deszcz=");Serial.print(deszcz); Serial.println(">3");}
-
-//u8g2.drawXBM( 64, 8, kropla_width, kropla_height, kropla_bits);
-//u8g2.drawXBM( 64, 16, kropla_width, kropla_height, kropla_bits);
-//u8g2.drawXBM( 64, 24, kropla_width, kropla_height, kropla_bits);
-
-//u8g2.drawXBM( 60, 4,  width16, height16, kropla16_bits);
-
-
-
-            
-            // print symbol deszczu
-            /*
-            String symbolOpad = "7";
-            u8g2.setFont(u8g2_font_unifont_t_weather);
-            symbolOpad.toCharArray(buftt, 16);
-            u8g2.drawUTF8(78, 18, buftt); 
-            */
-            
-            /*
-              * u8g2_font_unifont_t_weather  W=15 H=16 S=888 bytes
-              * info inne weather = https://raw.githubusercontent.com/wiki/olikraus/u8g2/fntpic/u8g2_font_unifont_t_weather.png
-            */
-
         } while ( u8g2.nextPage() );
 }
 
