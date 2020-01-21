@@ -1,0 +1,19 @@
+{
+"name": "ESP pin Serv",
+"short_name": "ESP pin Serv",
+"description": "ES Pin Server",
+"start_url": "index.html",
+"display": "fullscreen",
+"theme_color": "#111",
+"background_color": "#963",
+"icons": [{
+"src": "lamp200.png",
+"sizes": "200x200",
+"type": "image/png"
+}],
+"screenshots": [{
+"src": "lamp200.png",
+"sizes": "200x200",
+"type": "image/png"
+}]
+}
