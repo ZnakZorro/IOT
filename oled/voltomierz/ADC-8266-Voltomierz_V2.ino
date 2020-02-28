@@ -20,6 +20,10 @@ int Volt = 0;
 int Volty[50];
 int licznik=0;
 
+long previousMillis = 0;    
+long intervalADC = 500; // 500ms
+
+
 U8G2_SSD1306_128X32_UNIVISION_F_HW_I2C u8g2(U8G2_R0, /* reset=*/ 16, /* clock=*/ 5, /* data=*/ 4);
 
 ESP8266WiFiMulti wifiMulti; 
@@ -80,12 +84,13 @@ void setup(){
           printOLED(0,32," #"+String(i));
           Serial.println(i);
           i++;
+          if (i>20) break;
       } 
         
       Serial.print("WiFi connected");  
       Serial.print("IP address: ");
       Serial.println(WiFi.localIP());
-      printOLED(0,50,WiFi.localIP().toString());
+      printOLED(0,28,WiFi.localIP().toString());
       delay(2500);
   
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -110,6 +115,18 @@ void setup(){
     request->send(200, "text/plain", String(ESP.getFreeHeap()));
   });
 
+    // Send a GET request to <IP>/skok?message=<message>
+    server.on("/skok", HTTP_GET, [] (AsyncWebServerRequest *request) {
+        String message;
+        if (request->hasParam(PARAM_MESSAGE)) {
+            message = request->getParam(PARAM_MESSAGE)->value();
+        } else {message = "1";}
+        Serial.println(message);
+        int skok = message.toInt();
+        intervalADC = skok * 1000;
+        request->send(200, "text/plain", message);
+    });
+
     // Send a GET request to <IP>/podzial?message=<message>
     server.on("/podzial", HTTP_GET, [] (AsyncWebServerRequest *request) {
         String message;
@@ -122,6 +139,7 @@ void setup(){
         Serial.println(podzial);
         request->send(200, "text/plain", message);
     });
+  
   
   // Route to load /ADC
   server.on("/adc", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -158,8 +176,6 @@ void pomiarADC(){
 }
 
 
-long previousMillis = 0;    
-long intervalADC = 500; // 500ms
 
 void loop(){
       unsigned long currentMillis = millis();
