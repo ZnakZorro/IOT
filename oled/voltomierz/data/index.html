@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<link rel="manifest" href="webmanifest.json"> 
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
+	<meta name="apple-mobile-web-app-capable" content="yes"> 
+	<meta name="apple-mobile-web-app-title" content="mobiAPP"> 
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<link rel="icon" type="image/png" size="197x197" href="./voltomierz.png"> 
+	<link rel="shortcut icon" type="image/png" size="197x197" href="./voltomierz.png"> 	
+	<meta name="theme-color" content="#963">	
+  <title>Voltomierz</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+
+</head>
+<body>
+<h1><span id="volt">0.00</span>V @<span id="czas">2s</span></h1>
+ <div id="container"></div>
+<div>
+	<button onClick="zmien(1)">1sek</button>
+	<button onClick="zmien(5)">5sek</button>
+	<button onClick="zmien(15)">15sek</button>
+	<button onClick="zmien(60)">1min</button>
+	<button onClick="zmien(300)">5min</button>
+	<button onClick="zmien(900)">15min</button>
+	<hr />
+	<input id="podzial" onChange="nowyPodzial(this)" value="183" />
+<div> 
+<script>
+let inter = null;
+let interTime = 2000;
+let globalChart = null;
+let podzial = 183;
+
+function zmien(s){
+	interTime = s* 1000;
+	clearInterval(inter);
+	inter = setInterval(() => {rysuj(globalChart);},interTime);
+	document.getElementById("czas").textContent=s+"s";
+}
+
+function updatePodzial(faktor){
+	fetch("/podzial?message="+faktor)
+	.then(function(res){return res.text()}).then(function(data){console.log(data)})
+}
+
+function nowyPodzial(ten){
+	console.log(ten);
+	podzial=ten.value;
+	let faktor = Math.round(podzial*1000);
+	localStorage.setItem("faktor",faktor);
+	updatePodzial(faktor);
+}
+
+let rysuj=function(chart){
+	fetch("/adc")
+	.then(function(res){return res.json()})
+	.then(function(data){
+		let utnij = (chart.series[0].data.length > 100);
+		let time  = (new Date()).getTime(); 
+		let volt = Math.round(100*data[0]/podzial)/100;
+		chart.series[0].addPoint([time, volt], true, utnij);
+		document.getElementById("volt").textContent = volt;
+	}); 
+}
+
+Highcharts.chart('container', {
+    title: {text:null},
+    subtitle: {text: null},
+    yAxis: {title: {text: 'Volt'}},
+    xAxis: {type: 'datetime'},
+    series: [{name: 'Volt'}],
+	chart: {
+		type: 'line',
+		animation: false,
+		title: {text:null},
+		subtitle: {text: null},
+		yAxis: {title: {text: 'Volt'}},
+		xAxis: {type: 'datetime'},
+		events: {
+			load() {
+				let chart = this;
+				if (!globalChart) globalChart = chart;
+				rysuj(globalChart);
+				let series = chart.series[0];
+				inter = setInterval(() => {
+					rysuj(chart);
+				}, interTime)
+			}
+		}
+	},
+	series: [{name: 'Volt',color:'navy'}]
+});
+
+document.addEventListener("DOMContentLoaded",function(){
+    if (localStorage.getItem("faktor")){
+		let faktor=(localStorage.getItem("faktor"));
+		updatePodzial(faktor);
+		podzial=faktor/1000;
+		document.getElementById("podzial").value = podzial;		
+	}
+})
+
+</script>
+</body>
+</html>

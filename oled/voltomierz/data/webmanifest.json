@@ -1,0 +1,19 @@
+{
+"name": "Voltomierz",
+"short_name": "Voltomierz",
+"description": "Voltomierz",
+"start_url": "index.html",
+"display": "fullscreen",
+"theme_color": "red",
+"background_color": "red",
+"icons": [{
+"src": "./voltomierz.png",
+"sizes": "197x197",
+"type": "image/png"
+}],
+"screenshots": [{
+"src": "./voltomierz.png",
+"sizes": "197x197",
+"type": "image/png"
+}]
+}
