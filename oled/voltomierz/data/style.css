@@ -40,7 +40,14 @@ opacity: 0.7;
 transition: opacity .2s;
 border-radius: 0.75em;
 }
-
+button.mini {
+padding: 0.25em;
+margin: 0.25em;
+min-width:3em;
+font-size:1.1em;
+background-color: #369;	
+color:white;
+}
 .slider::-webkit-slider-thumb {
 -webkit-appearance: none;
 appearance: none;
