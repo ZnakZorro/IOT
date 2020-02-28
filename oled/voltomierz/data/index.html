@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<link rel="manifest" href="webmanifest.json"> 
@@ -28,12 +28,23 @@
 	<button onClick="zmien(900)">15min</button>
 	<hr />
 	<input id="podzial" onChange="nowyPodzial(this)" value="183" />
+	<hr />
+	<button class="mini" onClick="skok(1)">!1s</button>
+	<button class="mini" onClick="skok(2)">!2s</button>
+	<button class="mini" onClick="skok(10)">!10s</button>
+	<button class="mini" onClick="skok(60)">!1m</button>
+	<button class="mini" onClick="skok(300)">!5m</button>
 <div> 
 <script>
 let inter = null;
 let interTime = 2000;
 let globalChart = null;
 let podzial = 183;
+
+function skok(s){
+	fetch("/skok?message="+s)
+	//.then(function(res){return res.text()}).then(function(data){console.log(data)})
+}
 
 function zmien(s){
 	interTime = s* 1000;
