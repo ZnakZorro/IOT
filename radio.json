@@ -1,6 +1,10 @@
 [
 
 	{
+		"title": "TOK FM",
+		"stream": "https://pl-play.adtonos.com/tok-fm"
+	},
+	{
 		"title": "Nowy świat",
 		"stream": "http://stream.rcs.revma.com/ypqt40u0x1zuv"
 	},
@@ -13,12 +17,20 @@
 		"stream": "https://stream.open.fm/368?type=.aac"
 	},
 	{
-		"title": "TOK FM",
-		"stream": "https://pl-play.adtonos.com/tok-fm"
-	},
-	{
 		"title": "RMF Classic",
 		"stream": "http://195.150.20.6/rmf_classic"
+	},
+	{
+		"title": "Swiss Jazz",
+		"stream": "http://stream.srg-ssr.ch/m/rsj/mp3_128"
+	},
+	{
+		"title": "Swiss Classic",
+		"stream": "http://stream.srg-ssr.ch/m/rsc_de/mp3_128"
+	},
+	{
+		"title": "Swiss Pop",
+		"stream": "http://stream.srg-ssr.ch/m/rsp/mp3_128"
 	},
 	{
 		"title": "Sz-n PR",
@@ -243,18 +255,6 @@
 	{
 		"title": "UK1940",
 		"stream": "http://149.255.59.162:8062/stream?type=http"
-	},
-	{
-		"title": "Swiss Jazz",
-		"stream": "http://stream.srg-ssr.ch/m/rsj/mp3_128"
-	},
-	{
-		"title": "Swiss Classic",
-		"stream": "http://stream.srg-ssr.ch/m/rsc_de/mp3_128"
-	},
-	{
-		"title": "Swiss Pop",
-		"stream": "http://stream.srg-ssr.ch/m/rsp/mp3_128"
 	},
 	{
 		"title": "JazzFm",
