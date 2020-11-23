@@ -41,6 +41,10 @@
 		"stream": "http://stream3.nadaje.com:8200/szczecinfm"
 	},
 	{
+		"title": "Najpiekniejsze",
+		"stream": "http://mp3.polskieradio.pl:8020/"
+	},	
+	{
 		"title": "Złote",
 		"stream": "http://radiostream.pl/tuba8930-1.mp3"
 	},
@@ -83,10 +87,6 @@
 	{
 		"title": "Ballady",
 		"stream": "http://stream3.polskieradio.pl:8074/"
-	},
-	{
-		"title": "Najpiekniejsze",
-		"stream": "http://mp3.polskieradio.pl:8020/"
 	},
 	{
 		"title": "RFM-Niezapomniane",
