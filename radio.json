@@ -1,21 +1,5 @@
 [
-{
-"title": "nowyswiat.online",
-"stream": "https://stream.nowyswiat.online/mp3"
-},{
-"title": "nowy świat AAC+64",
-"stream": "https://stream.nowyswiat.online/aac"
-},{
-"title": "nowy świat",
-"stream": "http://stream.rcs.revma.com/ypqt40u0x1zuv"
-},{
-"title": "nowy świat s",
-"stream": "https://stream.rcs.revma.com/ypqt40u0x1zuv"
-},{
-"title": "nowty Świat o",
-"stream": "https://stream.open.fm/368?type=.aac"
-},	
-	
+
 	{
 		"title": "Nowy świat",
 		"stream": "http://stream.rcs.revma.com/ypqt40u0x1zuv"
@@ -63,14 +47,6 @@
 	{
 		"title": "Trójka",
 		"stream": "http://stream3.polskieradio.pl:8904/"
-	},
-	{
-		"title": "Czwórka",
-		"stream": "http://stream3.polskieradio.pl:8906/"
-	},
-	{
-		"title": "PR24",
-		"stream": "http://stream4.polskieradio.pl:8480/"
 	},
 	{
 		"title": "Radio Baobab",
@@ -333,16 +309,23 @@
 		"stream": "http://94.23.201.38:8050/stream"
 	},		
 	{
-		"title": "SeperFM Szczecin",
+		"title": "!SeperFM Szczecin",
 		"stream": "http://vps1.ltnt.pl:8000/superfm.mp3"
 	},
 	{
-		"title": "357 https",
+		"title": "!357 https",
 		"stream": "https://stream.open.fm/378?type=.aac"
 	},
 	{
-		"title": "357 http",
+		"title": "!357 http",
 		"stream": "http://stream.open.fm/378?type=.aac"
-	}
+	},
+{
+"title": "nowyswiat.online",
+"stream": "https://stream.nowyswiat.online/mp3"
+},{
+"title": "nowy świat AAC+64",
+"stream": "https://stream.nowyswiat.online/aac"
+}	
 ]
 
