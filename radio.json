@@ -1,8 +1,12 @@
 [
 
 	{
-		"title": "TOK FM",
+		"title": "TOK FM s",
 		"stream": "https://pl-play.adtonos.com/tok-fm"
+	},
+	{
+		"title": "TOK FM",
+		"stream": "http://pl-play.adtonos.com/tok-fm"
 	},
 	{
 		"title": "Nowy świat",
