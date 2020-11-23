@@ -53,6 +53,10 @@
 		"stream": "https://radiostream.pl/tuba8930-1.mp3"
 	},
 	{
+		"title": "RFM-Nostalgia",
+		"stream": "http://195.150.20.242:8000/rmf_nostalgia"
+	},
+	{
 		"title": "Jedynka",
 		"stream": "http://stream3.polskieradio.pl:8900/"
 	},
@@ -95,10 +99,6 @@
 	{
 		"title": "RFM-Relax",
 		"stream": "http://195.150.20.242:8000/rmf_relaks"
-	},
-	{
-		"title": "RFM-Nostalgia",
-		"stream": "http://195.150.20.242:8000/rmf_nostalgia"
 	},
 	{
 		"title": "Smoothjazz.pl",
