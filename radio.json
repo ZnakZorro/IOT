@@ -1,9 +1,4 @@
 [
-
-	{
-		"title": "TOK FM s",
-		"stream": "https://pl-play.adtonos.com/tok-fm"
-	},
 	{
 		"title": "TOK FM",
 		"stream": "http://pl-play.adtonos.com/tok-fm"
@@ -13,6 +8,14 @@
 		"stream": "http://stream.rcs.revma.com/ypqt40u0x1zuv"
 	},
 	{
+		"title": "357",
+		"stream": "http://stream.open.fm/378?type=.aac"
+	},	
+	{
+		"title": "TOK FM s",
+		"stream": "https://pl-play.adtonos.com/tok-fm"
+	},
+	{
 		"title": "Nowy świat s",
 		"stream": "https://stream.rcs.revma.com/ypqt40u0x1zuv"
 	},
@@ -20,6 +23,10 @@
 		"title": "Nowty Świat o",
 		"stream": "https://stream.open.fm/368?type=.aac"
 	},
+	{
+		"title": "!357 https",
+		"stream": "https://stream.open.fm/378?type=.aac"
+	},	
 	{
 		"title": "RMF Classic",
 		"stream": "http://195.150.20.6/rmf_classic"
@@ -315,15 +322,7 @@
 	{
 		"title": "!SeperFM Szczecin",
 		"stream": "http://vps1.ltnt.pl:8000/superfm.mp3"
-	},
-	{
-		"title": "!357 https",
-		"stream": "https://stream.open.fm/378?type=.aac"
-	},
-	{
-		"title": "!357 http",
-		"stream": "http://stream.open.fm/378?type=.aac"
-	},
+	},	
 {
 "title": "nowyswiat.online",
 "stream": "https://stream.nowyswiat.online/mp3"
