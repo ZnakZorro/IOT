@@ -10,6 +10,10 @@
 	{
 		"title": "357",
 		"stream": "http://stream.open.fm/378?type=.aac"
+	},
+	{
+		"title": "357ip",
+		"stream": "http://193.222.135.71/378"
 	},	
 	{
 		"title": "TOK FM s",
