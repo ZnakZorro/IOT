@@ -22,7 +22,8 @@ app.post('/rns', (req, res) => {
   HTML__page(res,"rns");
 });
 app.post('/357', (req, res) => {
-  res.send("<h3>357</h3>");
+  //res.send("<h3>357</h3>");
+  HTML__page(res,"357");
   
 });
 

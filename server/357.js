@@ -10,7 +10,25 @@ var promiseRNS = new Promise((resolve, reject) => {
 		//const $ = cheerio.load(response.body);
 		let arrRADIO = [];
 		let teraz = $("div.schedule-day--today div.schedule-item");
-		console.log(teraz);
+			//console.log(teraz);
+			teraz.each(async(i, l) => {
+				//console.log(i,"......................................................");
+				let linia = $(l);
+				//console.log((linia));
+				//for (let i=0; i<7; i++) console.log("=",i,linia[0].children[4].children[i].children[0]);
+				//console.log(JSON.stringify(linia[0].children[4].children[0],null,"\t"));
+				//console.log(linia[0].children[2].children[0].data);
+
+
+				let autor = linia[0].children[4].children[2].children[0].data;
+				let text  = linia[0].children[4].children[0].children[0].data;
+				let godz  = linia[0].children[2].children[0].data;
+				let obj = {};
+					obj.text = text+", "+autor;
+					obj.godz = godz;
+					obj.link = "#";
+				arrRADIO.push(obj);
+			})
 				/*
 				let teraz = $("div.proradio-activeschedule h3.proradio-post__title");//<div class="proradio-row proradio-activeschedule">		
 				teraz.each(async(i, l) => {
