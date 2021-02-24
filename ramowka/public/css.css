@@ -1,0 +1,20 @@
+body {font:normal 14pt Verdana; margin:0;padding:1% 0.5%;}
+button {font-size:14pt;}
+p,ul,ol {margin:0.25em 0;}
+a {text-decoration:none; color:#222;}
+.active {font-weight:bold; color:navy;}
+div{}
+div.container {margin:0;}
+div.container div {margin:0;}
+svg {display:none;}
+.row {
+	margin:0.5%;
+	padding:0.5em;
+}
+.col {
+    width: 46%;
+    border: 1px solid silver;
+    display: inline-block;
+    vertical-align: top;
+}
+@media (max-width: 892px) {.col {display:block; width: 94%;margin:1% 0;}}
